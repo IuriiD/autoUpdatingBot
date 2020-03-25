@@ -7,6 +7,7 @@ Video description copy:
 In this video we will create an auto-updating chatbot which will be self-expanding with new training phrases/responses (intents) through the dialog. The bot will be built on Dialogflow with a webhook written on node.js and hosted on Heroku.
 
 Resources mentioned:
+
 👉 Repository of this project (with Dialogflow agent exported): https://github.com/IuriiD/autoUpdatin...
 
 👉 NLP platform used: https://dialogflow.com/
