@@ -51,8 +51,18 @@ gaApp
         break;
       }
 
-      default:
+      default: {
+        const { intentDetectionConfidence } = conv.body.queryResult;
+        if (intentDetectionConfidence >= parseFloat(process.env.CONFIDENCE_LIMIT_FOR_INTENT_UPDATE)) {
+          const { name: intentPath } = conv.body.queryResult.intent;
+          const newPhrase = conv.query;
+          await df.updateIntent(intentPath, newPhrase);
+          return conv.ask(
+            `${conv.body.queryResult.fulfillmentText}\n\n(Phrase "${newPhrase}" was added to this intent).`,
+          );
+        }
         return conv.ask(conv.body.queryResult.fulfillmentText);
+      }
     }
   })
   .catch((conv, error) => {
