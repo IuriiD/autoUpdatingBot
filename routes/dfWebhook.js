@@ -53,7 +53,8 @@ gaApp
 
       default: {
         const { intentDetectionConfidence } = conv.body.queryResult;
-        if (intentDetectionConfidence >= parseFloat(process.env.CONFIDENCE_LIMIT_FOR_INTENT_UPDATE)) {
+        const thresholdIntentDetectionConfidence = parseFloat(process.env.CONFIDENCE_LIMIT_FOR_INTENT_UPDATE) || 0.6;
+        if (intentDetectionConfidence >= thresholdIntentDetectionConfidence) {
           const { name: intentPath } = conv.body.queryResult.intent;
           const newPhrase = conv.query;
           await df.updateIntent(intentPath, newPhrase);
