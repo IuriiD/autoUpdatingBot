@@ -1,10 +1,15 @@
-AutoUpdatingBot - Adding intents through dialogue (Dialolgflow, node.js)
+AutoUpdatingBot - Managing the bot through the dialogue (Dialolgflow, node.js)
 
-Step-by-step video tutorial: https://www.youtube.com/watch?v=z8njCLPj9nk&t=2s
+Video 1: AutoUpdatingBot - Adding intents through dialogue - https://www.youtube.com/watch?v=z8njCLPj9nk
 
 Video description copy:
-
 In this video we will create an auto-updating chatbot which will be self-expanding with new training phrases/responses (intents) through the dialog. The bot will be built on Dialogflow with a webhook written on node.js and hosted on Heroku.
+
+Video 2: AutoUpdatingBot - using intentDetectionConfidence score to add training phrases - https://www.youtube.com/watch?v=Dil5OKKAUgs
+
+Video description copy:
+In this update to the previous video https://youtu.be/z8njCLPj9nk , in this series we will update our
+bot so that it will be able to automatically save new training phrases to the existing intents based on their similarity to the existing ones (using the intentDetectionConfidence value).
 
 Resources mentioned:
 
