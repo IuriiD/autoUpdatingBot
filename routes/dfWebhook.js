@@ -23,7 +23,7 @@ gaApp
       case 'Add_Rule': {
         const { training_phrase, bots_response } = conv.parameters; /* eslint-disable-line camelcase */
         await df.createIntent(
-          helpers.createIntentName(training_phrase),
+          await helpers.createIntentName(training_phrase, 'jpt-j'),
           [training_phrase] /* eslint-disable-line camelcase */,
           [bots_response] /* eslint-disable-line camelcase */,
         );

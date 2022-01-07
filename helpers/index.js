@@ -1,4 +1,6 @@
-function createIntentName(firstTrainingPhrase) {
+const { detectIntentNlpcloud } = require('../lib/nlpcloud');
+
+function createIntentNameSimple(firstTrainingPhrase) {
   const trainingPhraseReplaced = firstTrainingPhrase.replace(/\s/g, '_');
   const strLength = trainingPhraseReplaced.length;
   let strFixedLength = '';
@@ -9,6 +11,21 @@ function createIntentName(firstTrainingPhrase) {
     strFixedLength = `${trainingPhraseReplaced}${filler}`;
   }
   return `${strFixedLength}_${Date.now()}`;
+}
+
+async function createIntentNameJptJ(firstTrainingPhrase) {
+  return detectIntentNlpcloud(firstTrainingPhrase);
+}
+
+async function createIntentName(firstTrainingPhrase, method = 'default') {
+  let intentName = '';
+
+  if (method === 'jpt-j') {
+    intentName = await createIntentNameJptJ(firstTrainingPhrase);
+    console.log('intent name from jpt-j:', intentName);
+    return intentName || createIntentNameSimple(firstTrainingPhrase);
+  }
+  return createIntentNameSimple(firstTrainingPhrase);
 }
 
 function getSession(conv) {
