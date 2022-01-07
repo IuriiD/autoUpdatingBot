@@ -22,3 +22,5 @@ Resources mentioned:
 👉 Github repository with examples of using the dialogflow package (e.g. how to create a new intent, node.js): https://github.com/googleapis/nodejs-...
 
 👉 Bot deployed to: https://www.heroku.com/
+
+https://auto-updating-bot.herokuapp.com/webhook

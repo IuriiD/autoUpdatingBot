@@ -32,8 +32,8 @@ gaApp
       }
 
       case 'Default Fallback Intent': {
-        console.log('conv.query=', conv.query);
-        console.log(JSON.stringify(conv));
+        // console.log('conv.query=', conv.query);
+        // console.log(JSON.stringify(conv));
         userInputBuffer[sessionId] = conv.query;
         conv.ask(conv.body.queryResult.fulfillmentText);
         break;
