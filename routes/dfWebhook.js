@@ -2,6 +2,7 @@ const express = require('express');
 const ga = require('actions-on-google');
 const df = require('../lib/dialogflow');
 const helpers = require('../helpers');
+const { getUtteranceVariants } = require('../lib/ai21');
 
 const router = express.Router();
 
@@ -22,9 +23,16 @@ gaApp
     switch (intent) {
       case 'Add_Rule': {
         const { training_phrase, bots_response } = conv.parameters; /* eslint-disable-line camelcase */
+
+        let trainingPhrases = [training_phrase]; /* eslint-disable-line camelcase */
+        const utteranceVariants = await getUtteranceVariants(training_phrase);
+        if (utteranceVariants) {
+          trainingPhrases = [...trainingPhrases, ...utteranceVariants];
+        }
+
         await df.createIntent(
           await helpers.createIntentName(training_phrase, 'jpt-j'),
-          [training_phrase] /* eslint-disable-line camelcase */,
+          trainingPhrases,
           [bots_response] /* eslint-disable-line camelcase */,
         );
         conv.ask(conv.body.queryResult.fulfillmentText);
@@ -32,8 +40,6 @@ gaApp
       }
 
       case 'Default Fallback Intent': {
-        // console.log('conv.query=', conv.query);
-        // console.log(JSON.stringify(conv));
         userInputBuffer[sessionId] = conv.query;
         conv.ask(conv.body.queryResult.fulfillmentText);
         break;
@@ -58,9 +64,7 @@ gaApp
           const { name: intentPath } = conv.body.queryResult.intent;
           const newPhrase = conv.query;
           await df.updateIntent(intentPath, newPhrase);
-          return conv.ask(
-            `${conv.body.queryResult.fulfillmentText}\n\n(Phrase "${newPhrase}" was added to this intent).`,
-          );
+          return conv.ask(conv.body.queryResult.fulfillmentText);
         }
         return conv.ask(conv.body.queryResult.fulfillmentText);
       }
