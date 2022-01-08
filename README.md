@@ -11,6 +11,8 @@ Video description copy:
 In this update to the previous video https://youtu.be/z8njCLPj9nk , in this series we will update our
 bot so that it will be able to automatically save new training phrases to the existing intents based on their similarity to the existing ones (using the intentDetectionConfidence value).
 
+UPD. 01-08-21: Added integration with https://studio.ai21.com/docs/api/ (GPT model Jurassic-1 "Jumbo") for generation of utterances variants and with https://docs.nlpcloud.io/#generation (JPT-J) for getting a more laconic intent names (that is to detect intent from the given utterance)
+
 Resources mentioned:
 
 👉 Repository of this project (with Dialogflow agent exported): https://github.com/IuriiD/autoUpdatin...
